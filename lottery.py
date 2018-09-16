@@ -3,8 +3,8 @@
 
 import click
 import datetime, time
-import random
-import csv
+import os, random
+import json, csv
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
@@ -50,7 +50,7 @@ path_to_firefox = '/Applications/Firefox.app/Contents/MacOS/firefox'
 WIN = 1
 LOSE = 0
 
-def login(driver):
+def login(driver, secrets):
 	url = 'http://gf2.xun1616.com:90/login'
 
 	driver.get(url)
@@ -62,8 +62,8 @@ def login(driver):
 	password = driver.find_element_by_id('password')
 	username.clear()
 	password.clear()
-	username.send_keys('lengyu250')
-	password.send_keys('lbb520')
+	username.send_keys(secrets['username'])
+	password.send_keys(secrets['password'])
 
 	driver.find_element_by_id('login').click()
 		
@@ -87,6 +87,14 @@ def login(driver):
 
 @click.command()
 def lottery():
+
+	try:
+		secrets_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secrets.json')
+		with open(secrets_path) as f:    
+			secrets = (json.load(f))['lottery']
+	except FileNotFoundError:
+		print('Error: secrets file not found..')
+		return
 	
 	# binary = FirefoxBinary(path_to_firefox)
 	# binary.add_command_line_options('-devtools')
@@ -100,7 +108,7 @@ def lottery():
 	# driver.get('google.com')
 	# return
 
-	login(driver)
+	login(driver, secrets)
 	time.sleep(1)
 
 	# driver.find_element_by_tag_name("body").send_keys(Keys.COMMAND + Keys.ALT + 'c')
