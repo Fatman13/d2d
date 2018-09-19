@@ -19,8 +19,9 @@ proxies5={'https': 'https://127.0.0.1:1087',
 			'http': 'http://127.0.0.1:1087'}
 
 @click.command()
-@click.option('--video', default='1ePkfduubPU')
-def ytytyt(video):
+@click.option('--video', default='jwrr6aIWeus')
+@click.option('--path', default='/Users/fatman13/Documents/')
+def ytytyt(video, path):
 
 	for i in range(MAX_RETRIES):
 		try:
@@ -65,17 +66,17 @@ def ytytyt(video):
 
 	if num >= 0:
 		print('Downloading stream {}: {}'.format(num, streams[num]))
-		streams[num].download('/Users/fatman13/Documents/')
+		streams[num].download(path)
 		print('Downloading done..')
 
 		print('Downloading caption of {}'.format(yt.title))
 		caption = yt.captions.get_by_language_code('en')
 
-		filename = '/Users/fatman13/Documents/{}.srt'.format(yt.title)
+		filename = '{}{}.srt'.format(path, yt.title)
 		with open(filename, 'w') as fd:
 			try:
 				print(caption.generate_srt_captions(), file=fd)
-				print('/Users/fatman13/Documents/{}.srt created..'.format(yt.title))
+				print('{}{}.srt created..'.format(path, yt.title))
 			except AttributeError:
 				print('This video has no caption..')
 			

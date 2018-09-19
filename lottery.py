@@ -91,7 +91,7 @@ def lottery():
 	try:
 		secrets_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secrets.json')
 		with open(secrets_path) as f:    
-			secrets = (json.load(f))['lottery']
+			secrets = (json.load(f))['lottery1']
 	except FileNotFoundError:
 		print('Error: secrets file not found..')
 		return
