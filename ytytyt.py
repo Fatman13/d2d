@@ -18,8 +18,15 @@ proxies4={'https': 'socks5://127.0.0.1:1086',
 proxies5={'https': 'https://127.0.0.1:1087', 
 			'http': 'http://127.0.0.1:1087'}
 
+def on_progress_callback(stream, chunk, file_handle, bytes_remaining):
+	# this function is called by download process... do not call directly!
+	total_size = stream.filesize
+	downloaded_size = total_size - bytes_remaining
+	progress = downloaded_size / total_size * 100
+	print('Downloading.. {:.2f}% '.format(progress), end='\r')
+
 @click.command()
-@click.option('--video', default='jwrr6aIWeus')
+@click.option('--video', default='UPH9iKpM-fk')
 @click.option('--path', default='/Users/fatman13/Documents/')
 def ytytyt(video, path):
 
@@ -31,7 +38,7 @@ def ytytyt(video, path):
 			# yt = YouTube(url, proxies=proxies2)
 			# yt = YouTube(url, proxies=proxies3)
 			# yt = YouTube(url, proxies=proxies4)
-			yt = YouTube(url, proxies=proxies5)
+			yt = YouTube(url, proxies=proxies5, on_progress_callback=on_progress_callback)
 		except URLError:
 			print('Error: Connection timeout..')
 			continue

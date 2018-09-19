@@ -3,6 +3,7 @@
 bin/
 test*
 secrets*
+man/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
