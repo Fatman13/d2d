@@ -25,8 +25,13 @@ def on_progress_callback(stream, chunk, file_handle, bytes_remaining):
 	progress = downloaded_size / total_size * 100
 	print('Downloading.. {:.2f}% '.format(progress), end='\r')
 
+def on_complete_callback(stream, file_handle):
+	# this function is called by download process... do not call directly!
+	# do nothing but print newline
+	print()
+
 @click.command()
-@click.option('--video', default='UPH9iKpM-fk')
+@click.option('--video', default='8Fl9L1fGooU')
 @click.option('--path', default='/Users/fatman13/Documents/')
 def ytytyt(video, path):
 
@@ -38,7 +43,10 @@ def ytytyt(video, path):
 			# yt = YouTube(url, proxies=proxies2)
 			# yt = YouTube(url, proxies=proxies3)
 			# yt = YouTube(url, proxies=proxies4)
-			yt = YouTube(url, proxies=proxies5, on_progress_callback=on_progress_callback)
+			yt = YouTube(url, 
+						proxies=proxies5, 
+						on_progress_callback=on_progress_callback,
+						on_complete_callback=on_complete_callback)
 		except URLError:
 			print('Error: Connection timeout..')
 			continue
