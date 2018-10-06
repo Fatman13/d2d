@@ -4,6 +4,8 @@ bin/
 test*
 secrets*
 man/
+*.json
+pip-selfcheck.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

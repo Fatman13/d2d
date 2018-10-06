@@ -31,7 +31,7 @@ def on_complete_callback(stream, file_handle):
 	print()
 
 @click.command()
-@click.option('--video', default='8Fl9L1fGooU')
+@click.option('--video', default='yJ5YHdt2GIM')
 @click.option('--path', default='/Users/fatman13/Documents/')
 def ytytyt(video, path):
 
@@ -43,8 +43,11 @@ def ytytyt(video, path):
 			# yt = YouTube(url, proxies=proxies2)
 			# yt = YouTube(url, proxies=proxies3)
 			# yt = YouTube(url, proxies=proxies4)
-			yt = YouTube(url, 
-						proxies=proxies5, 
+			# yt = YouTube(url,
+			# 			proxies=proxies5,
+			# 			on_progress_callback=on_progress_callback)
+			yt = YouTube(url,
+						proxies=proxies5,
 						on_progress_callback=on_progress_callback,
 						on_complete_callback=on_complete_callback)
 		except URLError:
